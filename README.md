@@ -5,6 +5,11 @@ This will handle components you have imported into your project if they are hous
 directory as your `.kicad_pro` file and have used relative file imports.
 
 ## Installation
+Requires [brew](https://brew.sh/) (rename directory pkg):
+```bash
+brew install rename
+```
+
 ```bash
 git clone https://github.com/HarveyBates/kicad-rename-zsh
 cd kicad-rename-zsh
