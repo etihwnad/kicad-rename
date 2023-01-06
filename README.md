@@ -14,8 +14,8 @@ brew install rename
 git clone https://github.com/HarveyBates/kicad-rename-zsh
 cd kicad-rename-zsh
 chmod -x kicad-rename.sh
-pwd
-echo 'alias kicad-rename="<your/working/directory>/kicad-rename.sh"' >> ~/.zshrc
+pwd # Copy this into next line
+echo 'alias kicad-rename="<PASTE_HERE>/kicad-rename.sh"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
