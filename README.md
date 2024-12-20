@@ -1,5 +1,7 @@
 # kicad-rename
 
+> Modified from original version: https://github.com/HarveyBates/kicad-rename-zsh
+
 Rename KiCAD projects. Will handle files, directories and sub-directories. Skips `.zip` files.
 
 This will handle components you have imported into your project if they are housed in the same directory as your `.kicad_pro` file and have used relative file imports.
