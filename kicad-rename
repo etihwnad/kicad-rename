@@ -1,0 +1,59 @@
+#!/bin/bash
+
+# modified from original:
+# https://github.com/HarveyBates/kicad-rename-zsh/tree/main
+
+package="kicad-rename"
+prev_name=''
+new_name=''
+
+function help() {
+    echo "$package - Rename KiCad project and directories."
+    echo " "
+    echo "$package -p old_name -n new_name"
+    echo " "
+    echo "options:"
+    echo "-h			Show help information."
+    echo "-p	(required)	Previous KiCAD project name."
+    echo "-n	(required)	New KiCAD project name."
+}
+
+
+# Check that rename is installed
+if !which rename &>/dev/null
+then
+	echo "Missing required package: rename"
+	exit 1
+fi
+
+
+while getopts 'p:n:h' flag; do
+	case "${flag}" in
+		p) prev_name="${OPTARG}" ;;
+		n) new_name="${OPTARG}" ;;
+		h) help; exit 1 ;;
+	esac
+done
+
+
+if [[ "${prev_name}" == '' ]]; then
+	echo "Previous KiCAD project name not found. Exiting." 
+        help
+	exit 1
+fi
+
+
+if [[ "${new_name}" == '' ]]; then
+	echo "New KiCAD project name not found. Exiting." 
+        help
+	exit 1
+fi
+
+# Rename within files except zip files
+find . -name "${prev_name}*.*" -print0 \
+    | xargs -0 -I{} -n1 sed -i -e "s/${prev_name}/${new_name}/g" '{}'
+
+# Rename subdirectories
+find . -name "${prev_name}*" -print0 \
+    | xargs -0 -I{} rename "s/${prev_name}/${new_name}/" '{}'
+
